@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mono Solver</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="mainContainer">
+        <nav class="mainNavContainer">
+            <div class="mainNav">
+                <div class="logo"></div>
+                <div class="currentSession" style="color: gray;"></div>
+            </div>
+        </nav>
+        <div class="sideMenu">
+            <div class="menu">
+                <div class="container">
+                    <div class="profile">
+                        <div class="pfp"></div>
+                        Your Database
+                        <button class="add menuButtons">
+                            <div class="desc">
+                                Create a new Session<br>
+                                <span style="color: grey">Shift + n</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mouseDetector"></div>
+        </div>
+        <div class="timer">
+            Select <span style="font-weight: bold; margin: 10px;">Session</span> to Begin
+        </div>
+        <div class="infoPanelContainer">
+            <div class="infoPanel">
+                <div class="PBSolveWrapper">
+                    <span>Personal Best</span>
+                    <span class="personalBest"></span>
+                    <span class="date"></span>
+                </div>
+                <div class="allSolvesContainer">
+                    <span>Solves</span>
+                    <div class="allSolves"></div>
+                </div>
+                <div class="averageOf5">
+                    <span>Average of 5</span>
+                    <div class="averageOf5Display"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- THINGS TO ADD: 
+Average of 5, 12, 50, 100
+Personal best single
+personal best of 5, 12, 50, 100

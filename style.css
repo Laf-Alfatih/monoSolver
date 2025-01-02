@@ -1,0 +1,442 @@
+@import url('https://fonts.cdnfonts.com/css/product-sans');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+* {
+    font-family: 'Product Sans', sans-serif;
+    color: white;
+}
+
+:root {
+    --bgBlack: rgb(19, 19, 19);
+    --secondaryBg: rgb(31, 31, 31);
+    --borderBlack: rgba(42,42,42,1);
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.mainContainer {
+    background: var(--bgBlack);
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 1fr 5fr;
+    position: relative;
+}
+
+.mainNavContainer {
+    grid-area: 1/1/2/3;
+}
+
+.sideMenu {
+    grid-area: 2/1/3/2;
+    height: calc(100% - 50px);
+    position: relative;
+}
+
+.menu {
+    background: var(--secondaryBg);
+    border-radius: 0 8px 8px 0;
+    border: 1.5px solid var(--borderBlack);
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: -100%;
+    opacity: 1;
+    transition: 500ms;
+}
+
+.mouseDetector {
+    height: 100%;
+    width: 100%;
+    background: red;
+    position: absolute;
+    opacity: 0;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.menu > .container {
+    margin: 10px;
+    display: grid;
+    grid-template-rows: repeat(16, 30px);
+    grid-template-columns: repeat(1, 1fr);
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    gap: 5px;
+}
+
+.profile {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.pfp {
+    height: 30px;
+    width: 30px;
+    background-image: url(images/AnonymousPFP.png);
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.add {
+    background: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+    background-image: url(Icons/add.png);
+    background-size: 100%;
+    background-position: center;
+    margin-left: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    transition: 300ms;
+}
+
+.add > .desc {
+    text-align: left;
+    padding: 7px;
+    background: var(--secondaryBg);
+    height: 35px;
+    width: 125px;
+    border-radius: 8px;
+    border: 1.5px solid var(--borderBlack);
+    position: absolute;
+    left: 300%;
+    top: -85%;
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.add:hover > .desc {
+    display: block;
+}
+.add:hover {
+    background-color: rgba(31, 31, 31, 0.5);
+}
+
+.renameSesh {
+    font-size: 0.85rem;
+    background-color: var(--secondaryBg);
+    border: 1.5px solid var(--borderBlack);
+    border-radius: 5px;
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    position: absolute;
+    width: 130px;
+    z-index: 4;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: repeat(2, 30px);
+    grid-template-columns: 1fr 30px;
+    gap: 3px;
+}
+
+.renameSesh > input {
+    background-color: var(--bgBlack);
+    border: 1.5px solid var(--borderBlack);
+    border-radius: 5px;
+    margin-top: 5px;
+    width: calc(100% - 5px);
+    outline: none;
+    text-indent: 0.25rem;
+    grid-area: 2/1/3/2;
+}
+
+.cancelWrapper {
+    grid-area: 2/2/3/3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.cancelWrapper:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+.cancelSesh {
+    background: none;
+    background-image: url(Icons/deleteSession.png);
+    height: 75%;
+    width: 75%;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 9999;
+}
+
+.session {
+    background: none;
+    border: none;
+    color: gray;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.session:hover {
+    background-color: rgb(35, 35, 35);
+}
+
+.icon {
+    background-image: url(Icons/Cube.png);
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+}
+
+.deleteSessionBtn {
+    right: 10px;
+    height: 20px;
+    width: 20px ;
+    background-color: transparent;
+    background-image: url(Icons/deleteSession.png);
+    background-position: center;
+    background-size: cover;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.deleteSessionBtn:hover {
+    transform: scale(1.2);
+}
+
+.timer {
+    position: absolute;
+    z-index: 0;
+    grid-area: 1/1/3/3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondaryBg);
+    font-size: 3rem;
+}
+
+#minutes,#seconds,#ms {
+    font-family: 'Space Mono';
+}
+
+.timer > span {
+    color: var(--secondaryBg);
+    display: inline-block;
+    text-align: center;
+}
+
+#scrambleGenerator {
+    font-size: 1rem;
+    color: gray;
+}
+
+.startImage {
+    background-image: url(images/Space.png);
+    height: 30px;
+    width: 120px;
+    background-size: cover;
+    opacity: 0.2;
+    margin-top: 10px;
+}
+
+.infoPanelContainer {
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    right: 0px;
+    transform: translateX(100%);
+    transition: 800ms;
+}
+
+.infoPanel {
+    height: calc(100% - 20px);
+    gap: 10px;
+    margin: 10px;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: 1fr 1fr;
+}
+
+.mainNav {
+    margin: 7px;
+    height: calc(100% - 14px);
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PBSolveWrapper {
+    grid-area: 1/1/3/3;
+    background: var(--secondaryBg);
+    border-radius: 8px;
+    border: 1.5px solid var(--borderBlack);
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+
+    display: grid;
+    grid-template-rows: 20% 65% 1fr;
+    grid-template-columns: 1fr;
+    overflow: auto;
+}
+
+.PBSolveWrapper::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.PBSolveWrapper > .personalBest {
+    font-size: 4rem;
+    margin-left: 10px;
+    font-family: 'Space Mono';
+}
+
+.PBSolveWrapper > span:not(.personalBest):not(.date) {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    height: 100%;
+    display: flex;
+    align-items: last baseline;
+}
+
+.PBSolveWrapper > .date {
+    margin-left: 10px;
+    color: gray;
+    height: 100%;
+}
+
+.allSolvesContainer {
+    grid-area: 3/1/5/3;
+    background: var(--secondaryBg);
+    border-radius: 8px;
+    border: 1.5px solid var(--borderBlack);
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.allSolves {
+    background: rgb(23, 23, 23);
+    border-radius: 8px 8px 0 0;
+    border: 1.5px solid var(--borderBlack);
+    border-bottom: none;
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    overflow: auto;
+
+    height: calc(95% - 25px);
+    width: 95%;
+    position: absolute;
+    bottom: 0px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    grid-auto-rows: 30px;
+    gap: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.allSolves::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.allSolvesContainer > span {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.solveDisplay {
+    height: 100%;
+    width: calc(100% - 5px);
+    background: var(--secondaryBg);
+    border-radius: 8px;
+    border: 1.5px solid var(--borderBlack);
+    box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.plus2,.dnf,.removeSolve {
+    height: 90%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.plus2:hover,.dnf:hover,.removeSolve:hover {
+    transform: scale(1.1);
+}
+
+.dnf:hover {
+    color: rgb(241, 61, 61);
+}
+
+.plus2:hover {
+    color: rgb(255, 208, 0);
+}
+
+.removeSolve {
+    background-image: url(Icons/Close.png);
+    background-position: center;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.averageOf5 {
+    grid-area: 5/1/6/3;
+    background: var(--secondaryBg);
+    border-radius: 8px;
+    border: 1.5px solid var(--borderBlack);
+    display: grid;
+    grid-template-rows: 1.5rem 1fr;
+    gap: 10px;
+    position: relative;
+}
+
+.averageOf5 > span {
+    display: flex;
+    align-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-left: 5px;
+    box-sizing: border-box;
+    color: gray;
+}
+
+.averageOf5Display {
+    position: absolute;
+    display: flex;
+    align-content: center   ;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    font-family: 'Space Mono';
+    font-size: 2rem;
+}
