@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addSesh = document.querySelector('.add');
     const menuContainer = document.querySelector('.container');
     const timer = document.querySelector('.timer');
+    const mouseDetectorTutorial= document.querySelector('.mouseDetectorTutorial');
     let scrambleDisplay;
 
     // info panel
@@ -41,41 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    let isTouchingMenuButtons = false;
-
     let clock = null;
     let isTimerRunning = false;
     let miliseconds = 0, seconds = 0, minutes = 0;
-
-    const updateMenuButtonHoverStatus = () => {
-        const menuButtons = document.querySelectorAll('.menuButtons');
-        menuButtons.forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                isTouchingMenuButtons = true;
-            });
-            btn.addEventListener('mouseleave', () => {
-                isTouchingMenuButtons = false;
-            });
-        });
-    };
-
-    updateMenuButtonHoverStatus();
-
-    mouseDetector.onmouseenter = () => {
-        menu.style.left = '0%';
-        menu.style.opacity = '1';
-        mouseDetector.style.width = '100%';
-    };
-
-    mouseDetector.onmouseleave = () => {
-        setTimeout(() => {
-            if (!isTouchingMenuButtons) {
-                menu.style.left = '-100%';
-                menu.style.opacity = '0';
-                mouseDetector.style.width = '23%';
-            };
-        }, 100);
-    };
 
     document.addEventListener('keydown', (e) => {
         if (e.shiftKey && e.key === 'N') {
@@ -89,6 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         for(let i = 0; i < Sessions[sessionOpened].solves.length; i++){
             createSolveDisplay(i+1, Sessions[sessionOpened].solves[i]);
         };
+    };
+
+    mouseDetector.onmouseenter = () => {
+        mouseDetectorTutorial.style.opacity = 0;
     };
 
     const addSession = () => {
@@ -150,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     openSessionTimer(createSesh);
                 });
 
-                updateMenuButtonHoverStatus();
             };
         };
     };
@@ -276,13 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
         if (oldBestSolve !== newBestSolve) {
             pbDateDisplay.innerHTML = formattedDate;
+            Sessions[sessionOpened].bestSolveDate = formattedDate;
         };
-    
+        
+        pbDateDisplay.innerHTML = Sessions[sessionOpened].bestSolveDate || '';
+            
         pbDisplay.innerHTML = Sessions[sessionOpened].bestSolve;
     };
     
-    
-
     const finalTime = (time) => {
         const parts = time.split(/[:.]/).map(Number);
         let minutes = 0, seconds = 0, milliseconds = 0;
@@ -348,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const solveNumber = document.createElement('div');
         const solveTimeDisplay = document.createElement('div');
         const removeSolveBtn = document.createElement('button');
+        solveTimeDisplay.classList.add('solveTimeDisplay');
         plus2.classList.add('plus2');
         dnf.classList.add('dnf');
         dnf.innerHTML = 'DNF';
@@ -405,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     document.addEventListener('keyup', (e) => {
-        if (e.key === ' ') {
+        if (e.key === ' ' && parseInt(window.innerWidth) >= 769) {
             if (!isTimerRunning) {
                 isTimerRunning = true;
                 startTimer();
@@ -484,8 +458,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 createSesh.append(deleteSessionBtn);
                 
                 menuContainer.append(createSesh);
-
-                updateMenuButtonHoverStatus();
     
                 createSesh.addEventListener('click', () => {
                     openSessionTimer(createSesh);
